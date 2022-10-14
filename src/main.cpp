@@ -10,6 +10,9 @@
 
 using namespace std::experimental;
 
+#define MAP_COORDINATE_MAX (100)
+#define MAP_COORDINATE_MIN (0)
+
 static std::optional<std::vector<std::byte>> ReadFile(const std::string &path) {
   std::ifstream is{path, std::ios::binary | std::ios::ate};
   if (!is)
@@ -24,6 +27,38 @@ static std::optional<std::vector<std::byte>> ReadFile(const std::string &path) {
   if (contents.empty())
     return std::nullopt;
   return std::move(contents);
+}
+
+static bool CheckRange(const float &input) {
+  return ((input <= MAP_COORDINATE_MAX) && (input >= MAP_COORDINATE_MIN));
+}
+
+static void GetCoordinates(float &start_x, float &start_y, float &end_x,
+                           float &end_y) {
+
+  do {
+    std::cout << "Please enter the start point x coordinate: Start X = ";
+    std::cin >> start_x;
+    std::cout << std::endl;
+  } while (!(CheckRange(start_x)));
+
+  do {
+    std::cout << "Please enter the start point y coordinate: Start Y = ";
+    std::cin >> start_y;
+    std::cout << std::endl;
+  } while (!(CheckRange(start_y)));
+
+  do {
+    std::cout << "Please enter the end point x coordinate: End X = ";
+    std::cin >> end_x;
+    std::cout << std::endl;
+  } while (!(CheckRange(end_x)));
+
+  do {
+    std::cout << "Please enter the end point y coordinate: End Y = ";
+    std::cin >> end_y;
+    std::cout << std::endl;
+  } while (!(CheckRange(end_y)));
 }
 
 int main(int argc, const char **argv) {
@@ -55,21 +90,7 @@ int main(int argc, const char **argv) {
   float end_x = 0.0f;
   float end_y = 0.0f;
 
-  std::cout << "Please enter the start point x coordinate: Start X = ";
-  std::cin >> start_x;
-  std::cout << std::endl;
-
-  std::cout << "Please enter the start point y coordinate: Start Y = ";
-  std::cin >> start_y;
-  std::cout << std::endl;
-
-  std::cout << "Please enter the end point x coordinate: End X = ";
-  std::cin >> end_x;
-  std::cout << std::endl;
-
-  std::cout << "Please enter the end point y coordinate: End Y = ";
-  std::cin >> end_y;
-  std::cout << std::endl;
+  GetCoordinates(start_x, start_y, end_x, end_y);
 
   // Build Model.
   RouteModel model{osm_data};
