@@ -35,8 +35,8 @@ RouteModel::Node *RoutePlanner::NextNode() {
 
   std::sort(std::begin(open_list), std::end(open_list),
             [](const RouteModel::Node *n1, const RouteModel::Node *n2) {
-              return (((float)n1->g_value + (float)n1->h_value) <=
-                      ((float)n2->g_value + (float)n2->h_value));
+              return ((n1->g_value + n1->h_value) <=
+                      (n2->g_value + n2->h_value));
             });
 
   RouteModel::Node *smallest_f = open_list[0];

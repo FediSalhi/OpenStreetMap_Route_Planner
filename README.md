@@ -56,7 +56,7 @@ The testing executable is also placed in the `build` directory. From within `bui
     ./test
 ```
 ## TODO
-- check the complexitiy of std::insert and std::emplace_back and then std::reverse
+- check the complexitiy of std::insert and std::emplace_back and then std::reverse (done)
 - get rid of float type casting
 - check the rang for user inputs in the main function. The input should be between 0 and 100.
 
